@@ -41,12 +41,18 @@ variable "key_name" {
 variable "allowed_ssh_cidrs" {
   description = "CIDR блоки, которым разрешен SSH доступ"
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+  default     = []
 }
 
 variable "db_password" {
   description = "Пароль для базы данных (если используется)"
   type        = string
   sensitive   = true
+  default     = ""
+}
+
+variable "domain_name" {
+  description = "Доменное имя для приложения"
+  type        = string
   default     = ""
 }

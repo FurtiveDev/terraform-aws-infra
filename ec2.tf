@@ -74,10 +74,14 @@ resource "aws_instance" "web" {
   user_data = <<-EOF
     #!/bin/bash
     yum update -y
-    yum install -y httpd
-    systemctl start httpd
-    systemctl enable httpd
-    echo "<h1>${var.project_name} - ${var.environment}</h1>" > /var/www/html/index.html
+    yum install -y nginx
+    systemctl start nginx
+    systemctl enable nginx
+    cat > /usr/share/nginx/html/index.html <<'HTML'
+    <h1>${var.project_name}</h1>
+    <p>Environment: ${var.environment}</p>
+    <p>Status: running</p>
+    HTML
   EOF
 
   tags = {
